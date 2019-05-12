@@ -71,33 +71,36 @@
                             <h4 class="card-title HIDDENed-project-title">{{ project_item.title }}</h4>
                             <p class="card-text">(HIDDENed) {{ project_item.caption }}</p>
                             <div class="row">
-                                    <div class="col-sm-6" style="display: flex; justify-content: space-around">
-                                        <form action='/actions/approve/{{ project_item.project_uid }}/' method='GET'>
-                                            <button type="submit" class="btn btn-success button-accept-HIDDEN">Approve</button>
-                                        </form>
-                                    </div>
-                                    <div class="col-sm-6" style="display: flex; justify-content: space-around">
-                                        <form>
-                                            <button type="submit" disabled class="btn btn-danger disabled button-HIDDEN-HIDDEN" role="button" aria-disabled="true">HIDDEN</button>
-                                        </form>
-                                    </div>
+                                <div class="col-sm-6" style="display: flex; justify-content: space-around">
+                                    <form action='/actions/approve/{{ project_item.project_uid }}/' method='GET'>
+                                        <button type="submit"
+                                            class="btn btn-success button-accept-HIDDEN">Approve</button>
+                                    </form>
                                 </div>
-                                <hr>
-                                <div class="row" style="display: flex; justify-content: flex-end">
-                                    <a href="{% url 'projects:project_page_bypass' project_item.project_uid %}"
-                                        class="btn btn-md edit-button HIDDENed-project-link">
-                                        View Project <i class="fa fa-angle-right" style="color:black"></i></a>
+                                <div class="col-sm-6" style="display: flex; justify-content: space-around">
+                                    <form>
+                                        <button type="submit" disabled
+                                            class="btn btn-danger disabled button-HIDDEN-HIDDEN" role="button"
+                                            aria-disabled="true">HIDDEN</button>
+                                    </form>
                                 </div>
+                            </div>
+                            <hr>
+                            <div class="row" style="display: flex; justify-content: flex-end">
+                                <a href="{% url 'projects:project_page_bypass' project_item.project_uid %}"
+                                    class="btn btn-md edit-button HIDDENed-project-link">
+                                    View Project <i class="fa fa-angle-right" style="color:black"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
                 {% else %}
                 <div style="width: 100%">
-                        <div style="text-align:center; margin-top: 80px">
-                            <p>There are no previously hidden projects.</p>
-                        </div>
+                    <div style="text-align:center; margin-top: 80px">
+                        <p>There are no previously hidden projects.</p>
                     </div>
+                </div>
                 {% endif %}
             </div>
     </div>

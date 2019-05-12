@@ -233,6 +233,10 @@ body {
   height: auto;
 }
 
+.readme-content {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .readme-content a {
   color: #182970;
   font-weight: bold;
@@ -299,7 +303,7 @@ body {
   width: 200px;
 }
 
-.poster-enlarge{
+.poster-enlarge {
   padding: 0.5rem;
 }
 
@@ -309,7 +313,7 @@ body {
 
 .poster-thumbnail img:hover {
   box-shadow: 0 0 10px 1px rgba(189, 195, 199, 1);
-} 
+}
 
 
 /* 

@@ -74,6 +74,8 @@ def user_profile(request, username):
 
 @method_decorator(login_required, name="dispatch")
 class user_edit_view(UpdateView):
+    # TODO reject if neither admin nor current user
+
     model = models.User
     form_class = UserProfileForm
     template_name = "user/edit.html"
@@ -137,6 +139,8 @@ def project_view(request, project_uid):
 
 @method_decorator(login_required, name="dispatch")
 class project_edit_view(UpdateView):
+    # TODO reject if neither admin nor user already attached to project
+
     model = models.Project
     form_class = ProjectEditForm
     template_name = "projects/edit.html"
@@ -150,6 +154,7 @@ class project_edit_view(UpdateView):
         return reverse("projects:project_page", kwargs={'project_uid': self.kwargs["project_uid"]})
 
 
+@login_required
 def project_view_bypass(request, project_uid):
     current_project = models.Project.objects.get(project_uid=project_uid)
     try:
