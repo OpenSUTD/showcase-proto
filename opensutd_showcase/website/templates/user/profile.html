@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+
+<div class="container">
+    <div class="profile-cover-image">
+        <img src='{% static "images/cover_image.png" %}' alt="Cover Image">
+    </div>
+
+    <div class="row" style="margin-bottom: 30px">
+        <div class="col-sm-2">
+            <img class="profile-picture" src="{{ current_user.display_picture }}" alt="Card image">
+        </div>
+        <div class="col-sm-7 profile-description">
+            <h1 class="profile-name">{{ current_user.display_name }}</h1>
+            <p>{{ current_user.username }}</p>
+            <br>
+            <h5 class="profile-faculty text-primary">{{ current_user.pillar }} - Class of
+                {{ current_user.graduation_year }}</h5>
+            <p class="profile-bio text-primary">{{ current_user.bio }}</p>
+        </div>
+        <div class="col-sm-3">
+            <div class="edit-profile">
+                {% if user.is_authenticated %}
+                {% if user.username == current_user.username %}
+                <a class="btn btn-outline-primary btn-block" href="{% url 'projects:submit_new' %}" role="button"><i
+                        class="fas fa-file-upload"></i> Submit Project</a>
+                <a class="btn btn-outline-primary btn-block" href="{% url 'projects:user_edit' current_user.username %}"
+                    role="button"><i class="far fa-edit"></i> Edit Profile</a>
+                <a class="btn btn-outline-primary btn-block" href="{% url 'projects:approval' %}"
+                    role="button"><i class="fas fa-user-shield"></i> Admin Panel</a>
+                <hr>
+                {% endif %}
+                {% endif %}
+                <a class="btn btn-outline-primary btn-block" href="mailto:{{ current_user.contact_email }}"
+                    role="button"><i class="fas fa-at"></i> Contact User</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3>Projects</h3>
+    </div>
+    <div class="row">
+        {% for project in user_projects %}
+        <div class="col-sm-4" style="margin-top: 1rem">
+            <div class="project-card-sm">
+                {% if project.featured_image == "" %}
+                <img src="https://howtomechatronics.com/wp-content/uploads/2017/11/Arduino-Robot-Car-Project.jpg">
+                {% else %}
+                <img src="{{ project.featured_image }}">
+                {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title">{{ project.title }}</h4>
+                    <p class="card-text">{{ project.caption }}</p>
+                    <div class="row" style="display: flex; justify-content: space-around">
+                        <a href="{% url 'projects:project_page' project.project_uid %}" class="card-link">
+                            View Project <i class="fas fa-chevron-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

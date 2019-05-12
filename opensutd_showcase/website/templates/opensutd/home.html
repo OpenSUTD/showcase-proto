@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid homepage-header">
+    <h1>Welcome to OpenSUTD!</h1>
+    <p>OpenSUTD is an open community owned by and dedicated to sharing the work done by the SUTD
+        community</p>
+
+    <div class="call-for-action">
+        <div class="homepage-action">
+            <h4>For Students</h4>
+            <br>
+            <div class="action-details-container">
+                <p class="action-details">Browse various student projects</p>
+                <p class="action-details">Learn from student-curated materials</p>
+                <p class="action-details">Share your projects and knowledge</p>
+                <a class="btn btn-secondary" href="{% url 'projects:students' %}" role="button"
+                    style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="homepage-action">
+            <h4>For Educators</h4>
+            <br>
+            <div class="action-details-container">
+                <p class="action-details">Promote knowledge with course materials</p>
+                <p class="action-details">Encourage academic discussion, collaboration and contribution</p>
+                <a class="btn btn-secondary" href="{% url 'projects:educators' %}" role="button"
+                    style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="homepage-action">
+            <h4>For Leaders</h4>
+            <br>
+            <div class="action-details-container">
+                <p class="action-details">Learn about Open Organisations</p>
+                <p class="action-details">Manage policies with Open Source methodologies</p>
+                <a class="btn btn-secondary" href="{% url 'projects:leaders' %}" role="button"
+                    style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2><i class="fas fa-star"></i> Top Projects</h2>
+            <div class="row">
+                {% if top_projects_list %}
+                <!-- start iteration -->
+                {% for project_item in top_projects_list %}
+                <div class="col-sm-6">
+                    <div class="project-card-sm">
+                        {% if project_item.featured_image == "" %}
+                        <img
+                            src="https://howtomechatronics.com/wp-content/uploads/2017/11/Arduino-Robot-Car-Project.jpg">
+                        {% else %}
+                        <img src="{{ project_item.featured_image }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h4 class="card-title">{{ project_item.title }}</h4>
+                            <p class="card-text">{{ project_item.caption }}</p>
+                            <div class="row" style="display: flex; justify-content: space-around">
+                                <a href="{% url 'projects:project_page' project_item.project_uid %}" class="card-link">
+                                    View Project <i class="fas fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>Error! No projects are available.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-sm">
+            <h2><i class="far fa-clock"></i> Recent Projects</h2>
+            {% if recent_projects_list %}
+            <!-- start iteration -->
+            <div class="list-group list-group-flush" style="width: 100%">
+                {% for project_item in recent_projects_list %}
+                <a href="{% url 'projects:project_page' project_item.project_uid %}"
+                    class="list-group-item list-group-item-action" style="color: #424444">{{ project_item.title }}</a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>Error! No projects are available.</p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
