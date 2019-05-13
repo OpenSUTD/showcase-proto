@@ -85,7 +85,7 @@ class user_edit_view(UpdateView):
         return user
 
     def get_success_url(self, *args, **kwargs):
-        return reverse("projects:user", kwargs={'username': self.kwargs["username"]})
+        return reverse("website:user", kwargs={'username': self.kwargs["username"]})
 
 # Project List, Showcase and related views
 
@@ -151,7 +151,7 @@ class project_edit_view(UpdateView):
         return project
 
     def get_success_url(self, *args, **kwargs):
-        return reverse("projects:project_page", kwargs={'project_uid': self.kwargs["project_uid"]})
+        return reverse("website:project_page", kwargs={'project_uid': self.kwargs["project_uid"]})
 
 
 @login_required

@@ -14,7 +14,7 @@
                 <p class="action-details">Browse various student projects</p>
                 <p class="action-details">Learn from student-curated materials</p>
                 <p class="action-details">Share your projects and knowledge</p>
-                <a class="btn btn-secondary" href="{% url 'projects:students' %}" role="button"
+                <a class="btn btn-secondary" href="{% url 'website:students' %}" role="button"
                     style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="action-details-container">
                 <p class="action-details">Promote knowledge with course materials</p>
                 <p class="action-details">Encourage academic discussion, collaboration and contribution</p>
-                <a class="btn btn-secondary" href="{% url 'projects:educators' %}" role="button"
+                <a class="btn btn-secondary" href="{% url 'website:educators' %}" role="button"
                     style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
             </div>
         </div>
@@ -34,7 +34,7 @@
             <div class="action-details-container">
                 <p class="action-details">Learn about Open Organisations</p>
                 <p class="action-details">Manage policies with Open Source methodologies</p>
-                <a class="btn btn-secondary" href="{% url 'projects:leaders' %}" role="button"
+                <a class="btn btn-secondary" href="{% url 'website:leaders' %}" role="button"
                     style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
             </div>
         </div>
@@ -48,20 +48,20 @@
             <div class="row">
                 {% if top_projects_list %}
                 <!-- start iteration -->
-                {% for project_item in top_projects_list %}
+                {% for project in top_projects_list %}
                 <div class="col-sm-6">
                     <div class="project-card-sm">
-                        {% if project_item.featured_image == "" %}
+                        {% if project.featured_image == "" %}
                         <img
                             src="https://howtomechatronics.com/wp-content/uploads/2017/11/Arduino-Robot-Car-Project.jpg">
                         {% else %}
-                        <img src="{{ project_item.featured_image }}">
+                        <img src="{{ project.featured_image }}">
                         {% endif %}
                         <div class="card-body">
-                            <h4 class="card-title">{{ project_item.title }}</h4>
-                            <p class="card-text">{{ project_item.caption }}</p>
+                            <h4 class="card-title">{{ project.title }}</h4>
+                            <p class="card-text">{{ project.caption }}</p>
                             <div class="row" style="display: flex; justify-content: space-around">
-                                <a href="{% url 'projects:project_page' project_item.project_uid %}" class="card-link">
+                                <a href="{% url 'website:project_view' project.project_uid %}" class="card-link">
                                     View Project <i class="fas fa-chevron-circle-right"></i></a>
                             </div>
                         </div>
@@ -79,9 +79,9 @@
             {% if recent_projects_list %}
             <!-- start iteration -->
             <div class="list-group list-group-flush" style="width: 100%">
-                {% for project_item in recent_projects_list %}
-                <a href="{% url 'projects:project_page' project_item.project_uid %}"
-                    class="list-group-item list-group-item-action" style="color: #424444">{{ project_item.title }}</a>
+                {% for project in recent_projects_list %}
+                <a href="{% url 'website:project_view' project.project_uid %}"
+                    class="list-group-item list-group-item-action" style="color: #424444">{{ project.title }}</a>
                 {% endfor %}
             </div>
             {% else %}
