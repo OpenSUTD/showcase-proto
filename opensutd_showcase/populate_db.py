@@ -54,7 +54,7 @@ with open("demo_project_data.csv") as csvfile:
     next(reader, None)
     for row in reader:
         [title, caption, category, url,
-            status, users, tags, featured_image] = row
+            status, users, tags, featured_image, poster_url] = row
         print(row)
 
         project_uid = title.lower().replace(" ", "-")
@@ -67,6 +67,7 @@ with open("demo_project_data.csv") as csvfile:
                           caption=caption,
                           category=category,
                           url=url,
+                          poster_url=poster_url,
                           stars=stars,
                           featured_image=featured_image)
 

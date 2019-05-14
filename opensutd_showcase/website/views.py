@@ -105,9 +105,14 @@ def get_readme_and_stars(current_project_url):
     repo_url = current_project_url.split("/")
     repo_name = repo_url[-2] + "/" + repo_url[-1]
     repo = gh.get_repo(repo_name)
-    readme = str(base64.b64decode(
-        repo.get_contents("README.md").content))
+    try:
+        readme = str(base64.b64decode(
+            repo.get_contents("README.md").content))
+    except:
+        readme = str(base64.b64decode(
+            repo.get_contents("readme.md").content))
     readme = readme.replace("\\n", "\n")
+    readme = readme.replace("\\'", "'")
     readme = readme[2:-1]  # get rid of b' and '
     readme = markdown2.markdown(
         readme, extras=["fenced-code-blocks", "tables"])
@@ -118,6 +123,8 @@ def get_readme_and_stars(current_project_url):
     readme = readme.replace(
         'src="', 'src="https://raw.githubusercontent.com/' + repo_name + '/master/')
     readme = readme.replace('<|SPECIAL_TOKEN|>', 'src="http')
+    readme = readme.replace('<img src="https://github.com/', '<img src="https://raw.githubusercontent.com/')
+    readme = readme.replace('/blob/master/', '/master/')
 
     return readme, str(int(repo.stargazers_count))
 
