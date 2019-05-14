@@ -4,7 +4,6 @@ wheel
 django
 gunicorn
 uwsgi
-pygraphviz
 pydotplus
 django-trackstats
 django-taggit
