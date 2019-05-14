@@ -25,7 +25,7 @@ gh = Github(ACCESS_TOKEN)
 def index(request):
     # TODO order by GitHub stars for top projects
     top_projects_list = models.Project.objects.order_by(
-        "-published_date").filter(status="DISPLAY")[:4]
+        "-stars").filter(status="DISPLAY")[:4]
     recent_projects_list = models.Project.objects.order_by(
         "-published_date").filter(status="DISPLAY")[:9]
     context = {"top_projects_list": top_projects_list,
@@ -109,7 +109,8 @@ def get_readme_and_stars(current_project_url):
         repo.get_contents("README.md").content))
     readme = readme.replace("\\n", "\n")
     readme = readme[2:-1]  # get rid of b' and '
-    readme = markdown2.markdown(readme, extras=["fenced-code-blocks"])
+    readme = markdown2.markdown(
+        readme, extras=["fenced-code-blocks", "tables"])
 
     # fix image paths
     # ignore fully defined paths with http
@@ -130,7 +131,15 @@ def project_view(request, project_uid):
             readme = "Unable to retrieve README:\n"+str(e)
             stars = "0"
 
+        is_owner = False
+
+        for user in current_project.users.all():
+            if user.username == request.user.username:
+                is_owner = True
+                break
+
         context = {"current_project": current_project,
+                   "is_owner": is_owner,
                    "stars": stars,
                    "readme": readme}
 

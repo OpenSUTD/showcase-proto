@@ -10,9 +10,11 @@
             </div>
             <div class="col-sm-4" style="text-align: center !important;">
                 {% if user.is_authenticated %}
+                {% if is_owner == True or user.admin == True %}
                 <a class="btn btn-outline-primary project-button-header btn-block"
                     href="{% url 'website:project_edit' current_project.project_uid %}" role="button">
                     <i class="far fa-edit"></i> Edit Project</a>
+                {% endif %}
                 {% endif %}
                 <a class="btn btn-outline-primary project-button-header btn-block" href="#" role="button">
                     <i class="fas fa-share-alt-square"></i> Share Project</a>
@@ -63,20 +65,18 @@
             <div class="project-created-by">
                 <h5>Created by</h5>
             </div>
-            <br>
             {% for user in current_project.users.all %}
             <div class="card project-member">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img src='{% static "images/usericon.png" %}' alt="Card image">
+                        <img class="user-profile-pic-small" src='{{ user.display_picture }}' alt="Card image">
                     </div>
-                    <div class="col-sm-8" style="margin: auto">
+                    <div class="col-sm-8">
                         <a href="{% url 'website:user_profile' user.username %}"
-                            class="card-text project-member-name">{{ user.display_name}}, {{ user.pillar}}</a>
+                            class="card-text project-member-name">{{ user.display_name}}<br><small>{{ user.pillar}}</small></a>
                     </div>
                 </div>
             </div>
-            <br>
             {% endfor %}
             <hr>
             <p>Date Published: {{ current_project.published_date }}</p>

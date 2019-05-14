@@ -23,6 +23,26 @@ body {
     width: 100%;
 }
 
+nav:before {
+    content: "alpha";
+    position: fixed;
+    width: 80px;
+    height: 25px;
+    background: #EE8E4A;
+    top: 7px;
+    left: -20px;
+    text-align: center;
+    font-size: 13px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    line-height: 27px;
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
 .footer {
     margin: 1em;
     text-align: center;
@@ -58,10 +78,23 @@ body {
 }
 
 .homepage-call-to-action {
-    margin: 0em 1em;
+    margin: 0em auto;
+}
+
+@media (max-width: 1080px) {
+    .homepage-call-to-action {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1366px) {
+    .homepage-call-to-action {
+        width: 60%;
+    }
 }
 
 .homepage-action {
+    display: inline;
     color: whitesmoke;
     margin: 1em;
     padding: 1em;
@@ -70,6 +103,7 @@ body {
 }
 
 .homepage-action-button {
+    font-weight: bold;
     width: 100%;
 }
 
@@ -200,6 +234,10 @@ body {
     height: 600px;
 }
 
+.user-profile-pic-small {
+    border-radius: 50%;
+}
+
 .readme {
     width: 95%;
     padding-top: 20px;
@@ -219,7 +257,7 @@ body {
     height: auto;
 }
 
-.readme-card-body > h1:nth-child(2) {
+.readme-card-body>h1:nth-child(2) {
     font-size: 2.4em;
     font-weight: lighter;
 }
@@ -263,9 +301,7 @@ body {
 }
 
 .project-member {
-    padding: 10px;
-    padding-left: 0px;
-    display: inline-block;
+    padding: 1em 0em;
 }
 
 .project-member img {

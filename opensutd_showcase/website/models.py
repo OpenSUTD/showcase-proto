@@ -107,6 +107,8 @@ class Project(models.Model):
 
     tags = TaggableManager(through=GenericStringTaggedProject)
 
+    stars = models.IntegerField(default=0)
+
     def is_accepted(self):
         return self.status == "DISPLAY"
 
@@ -114,7 +116,7 @@ class Project(models.Model):
 class OpenSUTDProjectManager(object):
 
     def create_project(self, project_uid, title, caption, category, url,
-                       poster_url="", featured_image="",
+                       poster_url="", stars=0, featured_image="",
                        users=None, status="PENDING"):
 
         # validation
@@ -127,6 +129,7 @@ class OpenSUTDProjectManager(object):
                           caption=caption,
                           category=category,
                           url=url,
+                          stars=stars,
                           poster_url=poster_url,
                           featured_image=featured_image,
                           status=status)
@@ -134,6 +137,8 @@ class OpenSUTDProjectManager(object):
         project.save()
 
     def add_user_to_project(self, project_uid, username):
+        username = username.lower().strip()
+        print("Adding", username, "to", project_uid)
         project = Project.objects.get(project_uid=project_uid)
         user = User.objects.get(username=username)
         project.users.add(user)
@@ -176,6 +181,7 @@ class OpenSUTDUserManager(BaseUserManager):
 
         user = User(username=username,
                     display_name=display_name,
+                    display_picture=display_picture,
                     graduation_year=graduation_year,
                     pillar=pillar,
                     personal_links=personal_links,

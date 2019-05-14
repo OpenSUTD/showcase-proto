@@ -6,7 +6,7 @@
     <p class="">An open community owned by and dedicated to sharing the work done by the SUTD
         community</p>
 
-    <div class="row homepage-call-to-action">
+    <div class="row homepage-call-to-action mx-auto">
         <div class="col-sm homepage-action">
             <h4>For Students</h4>
             <div>
@@ -69,13 +69,13 @@
                     <div class="project-card-sm">
                         {% if project.featured_image == "" %}
                         <img
-                            src="https://howtomechatronics.com/wp-content/uploads/2017/11/Arduino-Robot-Car-Project.jpg">
+                            src="https://via.placeholder.com/340x200?text=no_featured_image">
                         {% else %}
                         <img src="{{ project.featured_image }}">
                         {% endif %}
                         <div class="card-body">
                             <h4 class="card-title">{{ project.title }}</h4>
-                            <p class="card-text">{{ project.caption }}</p>
+                            <p class="card-text" style="text-align: justify !important;">{{ project.caption }}</p>
                             <div class="row" style="display: flex; justify-content: space-around">
                                 <a href="{% url 'website:project_view' project.project_uid %}" class="card-link">
                                     View Project <i class="fas fa-chevron-circle-right"></i></a>
