@@ -3,43 +3,59 @@
 
 <div class="jumbotron jumbotron-fluid homepage-header">
     <h1>Welcome to OpenSUTD!</h1>
-    <p>OpenSUTD is an open community owned by and dedicated to sharing the work done by the SUTD
+    <p class="">An open community owned by and dedicated to sharing the work done by the SUTD
         community</p>
 
-    <div class="call-for-action">
-        <div class="homepage-action">
+    <div class="row homepage-call-to-action">
+        <div class="col-sm homepage-action">
             <h4>For Students</h4>
-            <br>
-            <div class="action-details-container">
-                <p class="action-details">Browse various student projects</p>
-                <p class="action-details">Learn from student-curated materials</p>
-                <p class="action-details">Share your projects and knowledge</p>
-                <a class="btn btn-secondary" href="{% url 'website:students' %}" role="button"
-                    style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
+            <div>
+                <p>Browse various student projects</p>
+                <p>Learn from student-curated materials</p>
+                <p>Share your projects and knowledge</p>
             </div>
         </div>
-        <div class="homepage-action">
+        <div class="col-sm homepage-action">
             <h4>For Educators</h4>
-            <br>
-            <div class="action-details-container">
-                <p class="action-details">Promote knowledge with course materials</p>
-                <p class="action-details">Encourage academic discussion, collaboration and contribution</p>
-                <a class="btn btn-secondary" href="{% url 'website:educators' %}" role="button"
-                    style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
+            <div>
+                <p>Promote knowledge with course materials</p>
+                <p>Encourage academic discussion, collaboration and contribution</p>
             </div>
         </div>
-        <div class="homepage-action">
+        <div class="col-sm homepage-action">
             <h4>For Leaders</h4>
-            <br>
-            <div class="action-details-container">
-                <p class="action-details">Learn about Open Organisations</p>
-                <p class="action-details">Manage policies with Open Source methodologies</p>
-                <a class="btn btn-secondary" href="{% url 'website:leaders' %}" role="button"
-                    style="margin-bottom:0px!important;">Get Involved <i class="fas fa-chevron-circle-right"></i></a>
-            </div>
+            <p>Learn about Open Organisations</p>
+            <p>Manage policies with Open Source methodologies</p>
+        </div>
+    </div>
+    <div class="row homepage-call-to-action">
+        <div class="col-sm">
+            <a class="btn btn-secondary homepage-action-button" href="{% url 'website:students' %}" role="button">Get
+                Involved <i class="fas fa-chevron-circle-right"></i></a>
+        </div>
+        <div class="col-sm">
+            <a class="btn btn-secondary homepage-action-button" href="{% url 'website:educators' %}" role="button">Get
+                Involved <i class="fas fa-chevron-circle-right"></i></a>
+        </div>
+        <div class="col-sm">
+            <a class="btn btn-secondary homepage-action-button" href="{% url 'website:leaders' %}" role="button">Get
+                Involved <i class="fas fa-chevron-circle-right"></i></a>
         </div>
     </div>
 </div>
+
+{% if user.is_authenticated %}
+{% if user.first_login == True %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 100%;">
+    <b>Welcome to OpenSUTD!</b>
+    Head over to your <a href="{% url 'website:user_profile' user.username%}">profile page</a> to update
+    your personal info!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+{% endif %}
 
 <div class="container">
     <div class="row">

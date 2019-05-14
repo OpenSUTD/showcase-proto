@@ -37,7 +37,9 @@
             </ul>
             {% if user.is_authenticated %}
             <span class="navbar-text">
-                <i class="far fa-user-circle"></i> Welcome, <a href="{% url 'website:user_profile' user.username%}">{{ user.display_name }}</a> (<a href="{% url 'account_logout' %}">SIGN OUT</a>)
+                <i class="far fa-user-circle"></i> Welcome, <a
+                    href="{% url 'website:user_profile' user.username%}">{{ user.display_name }}</a> (<a
+                    href="{% url 'account_logout' %}">SIGN OUT</a>)
             </span>
             {% else %}
             <span class="navbar-text">

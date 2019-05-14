@@ -14,8 +14,10 @@ from website.models import *
 
 um = OpenSUTDUserManager()
 
+# TODO create from env variable
+
 um.create_superuser("superadmin", password="asdf1234", display_name="",
-                    graduation_year=0, pillar="", personal_links="", admin_groups=[])
+                    graduation_year=0, pillar="", personal_links="")
 
 # create users
 

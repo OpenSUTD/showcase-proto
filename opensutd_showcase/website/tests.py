@@ -96,7 +96,7 @@ class TraverseLinksTest(TestCase):
                           poster_url="https://via.placeholder.com/150",
                           featured_image="https://via.placeholder.com/150")
 
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         pm.add_user_to_project("ACAD_00001", "dick")
         pm.add_user_to_project("ACAD_00001", "jane")
         pm.add_tag_to_project(
@@ -228,7 +228,7 @@ class SecuredPageTestCase(TestCase):
                        graduation_year=2018, pillar="ISTD")
 
     def test_auth_approval_view(self):
-        url = reverse("website:approve_project")
+        url = reverse("website:approve_project", args=("ACAD_00001",))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
@@ -297,7 +297,7 @@ class LogintoSecuredPageTestCase(TestCase):
 
     def test_login_project_edit(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         url = reverse("website:project_edit", args=("ACAD_00001",))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -440,7 +440,7 @@ class ProjectShowcaseTestCase(TestCase):
 
     def test_project_page_approved(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         url = reverse("website:project_view", args=("ACAD_00001",))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -448,14 +448,14 @@ class ProjectShowcaseTestCase(TestCase):
 
     def test_project_page_name(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         url = reverse("website:project_view", args=("ACAD_00001",))
         response = str(self.client.get(url).content)
         self.assertEqual("OpenSUTD Web Platform" in response, True)
 
     def test_project_tag(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         pm.add_tag_to_project("ACAD_00001", "tag1,tag2")
         url = reverse("website:project_view", args=("ACAD_00001",))
         response = str(self.client.get(url).content)
@@ -464,7 +464,7 @@ class ProjectShowcaseTestCase(TestCase):
 
     def test_project_page_contents(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         url = reverse("website:project_view", args=("ACAD_00001",))
         response = str(self.client.get(url).content)
         # print(response)
@@ -477,21 +477,21 @@ class ProjectShowcaseTestCase(TestCase):
 
     def test_project_page_load(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         url = reverse("website:project_view", args=("ACAD_00001",))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_project_page_not_empty(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         url = reverse("website:project_view", args=("ACAD_00001",))
         response = str(self.client.get(url).content)
         self.assertGreater(len(response), LEN_BASE)
 
     def test_project_author_name(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         pm.add_user_to_project("ACAD_00001", "tom")
         url = reverse("website:project_view", args=("ACAD_00001",))
         response = str(self.client.get(url).content)
@@ -499,7 +499,7 @@ class ProjectShowcaseTestCase(TestCase):
 
     def test_project_author_pillar(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         pm.add_user_to_project("ACAD_00001", "tom")
         url = reverse("website:project_view", args=("ACAD_00001",))
         response = str(self.client.get(url).content)
@@ -507,7 +507,7 @@ class ProjectShowcaseTestCase(TestCase):
 
     def test_project_list_page(self):
         pm = OpenSUTDProjectManager()
-        pm.set_project_status("ACAD_00001", "ACCEPT")
+        pm.set_project_status("ACAD_00001", "DISPLAY")
         url = reverse("website:projects_list")
         response = str(self.client.get(url).content)
         self.assertEqual("OpenSUTD Web Platform" in response, True)

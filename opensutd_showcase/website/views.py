@@ -66,6 +66,8 @@ def leaders_page_view(request):
 
 def user_profile(request, username):
     current_user = models.User.objects.get(username=username)
+    current_user.first_login = "False"
+    current_user.save()
     user_projects = models.Project.objects.filter(users=current_user)
     context = {"current_user": current_user,
                "user_projects": user_projects}
@@ -85,7 +87,7 @@ class user_edit_view(UpdateView):
         return user
 
     def get_success_url(self, *args, **kwargs):
-        return reverse("website:user", kwargs={'username': self.kwargs["username"]})
+        return reverse("website:user_profile", kwargs={'username': self.kwargs["username"]})
 
 # Project List, Showcase and related views
 

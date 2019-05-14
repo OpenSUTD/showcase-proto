@@ -59,8 +59,9 @@ class User(AbstractUser):
 
     pillar = models.CharField(max_length=4, choices=PILLAR_CHOICES, default="")
 
-    admin_groups = models.CharField(
-        max_length=4, choices=CATEGORY_CHOICES, default="")
+    admin = models.BooleanField(default="False")
+
+    first_login = models.BooleanField(default="True")
 
     contact_email = models.CharField(
         max_length=200, default="none@example.com")
@@ -164,8 +165,8 @@ class OpenSUTDUserManager(BaseUserManager):
 
     def create_user(self, username, display_name="",
                     display_picture="https://via.placeholder.com/150",
-                    graduation_year=0, pillar="",
-                    personal_links="", admin_groups=[], password="password1"):
+                    graduation_year=0, pillar="", first_login="True",
+                    personal_links="", admin="False", password="placeholderPassword"):
 
         if display_name == "":
             display_name = username
@@ -178,12 +179,13 @@ class OpenSUTDUserManager(BaseUserManager):
                     graduation_year=graduation_year,
                     pillar=pillar,
                     personal_links=personal_links,
-                    admin_groups=admin_groups,
+                    admin=admin,
+                    first_login=first_login,
                     password=password)
 
         user.save()
 
-    def create_superuser(self, username, password, display_name="", graduation_year=0, pillar="", personal_links="", admin_groups=[]):
+    def create_superuser(self, username, password, display_name="", graduation_year=0, pillar="", personal_links=""):
 
         if display_name == "":
             display_name = username
@@ -195,7 +197,7 @@ class OpenSUTDUserManager(BaseUserManager):
                          graduation_year=graduation_year,
                          pillar=pillar,
                          personal_links=personal_links,
-                         admin_groups=admin_groups,
+                         admin="True",
                          password=password,
                          is_staff=True,
                          is_superuser=True)

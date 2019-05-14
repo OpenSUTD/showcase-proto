@@ -27,9 +27,6 @@
                     <p class="card-text text-primary readme-content">
                         {{ readme | safe }}
                     </p>
-                    <p>Date Published: {{ current_project.published_date }}</p>
-                    <p>View more about the project on GitHub at: <a
-                            href="{{ current_project.url }}">{{ current_project.url }}</a></p>
                 </div>
             </div>
             <br>
@@ -64,7 +61,6 @@
 
         <div class="col-sm-3">
             <div class="project-created-by">
-                <h5> <i class="fas fa-star"></i> {{ stars }} </h5>
                 <h5>Created by</h5>
             </div>
             <br>
@@ -82,6 +78,11 @@
             </div>
             <br>
             {% endfor %}
+            <hr>
+            <p>Date Published: {{ current_project.published_date }}</p>
+            <h5><i class="fas fa-star"></i> {{ stars }} on GitHub</h5>
+            <p>Give the {{ current_project.title }} project a star on <a href="{{ current_project.url }}">GitHub</a>
+            <br>
             <div class="card project-tags">
                 <p class="text-primary" style="margin:0; margin-top: 20px">Related Tags:</p>
                 {% for tag in current_project.tags.all %}
@@ -91,6 +92,7 @@
                 </div>
                 {% endfor %}
             </div>
+            </p>
         </div>
     </div>
 </div>

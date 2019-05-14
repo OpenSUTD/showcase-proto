@@ -14,7 +14,8 @@
         </div>
         <div class="col-sm-7 profile-description">
             <h1 class="profile-name">{{ current_user.display_name }}</h1>
-            <p>{{ current_user.username }}</p>
+            <br>
+            <h5 class="text-primary">{{ current_user.username }}</h5>
             <br>
             <h5 class="profile-faculty text-primary">{{ current_user.pillar }} - Class of
                 {{ current_user.graduation_year }}</h5>
@@ -28,8 +29,8 @@
                         class="fas fa-file-upload"></i> Submit Project</a>
                 <a class="btn btn-outline-primary btn-block" href="{% url 'website:user_edit' current_user.username %}"
                     role="button"><i class="far fa-edit"></i> Edit Profile</a>
-                <a class="btn btn-outline-primary btn-block" href="{% url 'website:projects_admin' %}"
-                    role="button"><i class="fas fa-user-shield"></i> Admin Panel</a>
+                <a class="btn btn-outline-primary btn-block" href="{% url 'website:projects_admin' %}" role="button"><i
+                        class="fas fa-user-shield"></i> Admin Panel</a>
                 <hr>
                 {% endif %}
                 {% endif %}
@@ -40,8 +41,11 @@
     </div>
 
     <div class="row">
-        <h3>Projects</h3>
+        <div class="col">
+            <h2>Projects</h2>
+        </div>
     </div>
+
     <div class="row">
         {% for project in user_projects %}
         <div class="col-sm-4" style="margin-top: 1rem">
