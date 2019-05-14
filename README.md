@@ -1,5 +1,15 @@
 # OpenSUTD Showcase
 
+## About
+
+**OpenSUTD Showcase** is intended to be a "pretty" version of what we originally intended the OpenSUTD GitHub organisation to be - a collection and showcase of SUTD projects and work etc.
+
+![](readme_assets/header.jpg)
+
+OpenSUTD Showcase is a simple web platform that will allow users (both inside and outside OpenSUTD GitHub Organisation) to submit projects that will then be displayed on the Showcase website (in process of securing `showcase.sutd.dev`).
+
+![](readme_assets/project_sub_flow.jpg)
+
 ## Development
 
 ### Test Database Setup (sqlite)
